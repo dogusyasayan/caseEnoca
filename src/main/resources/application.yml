@@ -1,0 +1,33 @@
+spring:
+
+  sql:
+    init:
+      schema-locations: classpath:/sql/schema.sql
+      mode: always
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/enoca
+    username: developer
+    password: developer
+    hikari:
+      pool-name: enoca-db-pool
+      maximum-pool-size: 10
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto:  update
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+
+main:
+  allow-bean-definition-overriding: true
+

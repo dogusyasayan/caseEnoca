@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  # PostgreSQL Servisi:
+  # - postgres:latest imajını kullanarak PostgreSQL veritabanı servisini başlatır.
+  # - Çevresel değişkenler (environment variables) aracılığıyla PostgreSQL ayarlarını yapılandırır (veritabanı adı, kullanıcı adı ve şifre).
+  # - volumes aracılığıyla PostgreSQL veritabanının verilerini postgres-data adlı bir volume'a bağlar. Bu, veritabanı verilerinin kalıcı olarak saklanmasını sağlar.
+  # - ports aracılığıyla, localhost:5432 portundan dış dünyaya açar.
+  # - networks altında postgres adlı bir ağa bağlanır.
+  postgres:
+    container_name: postgres-db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: developer
+      POSTGRES_DB: enoca
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+
+  # Ağ Tanımı:
+  # - postgres adlı bir ağ tanımlanmıştır. Bu ağ, postgres servisini aynı ağda iletişim kurabilecekleri şekilde bir araya getirir.
+  postgres:
+    driver: bridge
+
+volumes:
+
+  # Volume Tanımı:
+  # - postgres-data adlı bir volume tanımlanmıştır. Bu volume, PostgreSQL servisinin veritabanı verilerini saklamak için kullanılır.
+  postgres-data:
