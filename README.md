@@ -32,8 +32,10 @@ Bu proje, müşteri (customer), sepet (cart), sepet içeriği (cartItem), sipari
 
 ## Teknolojiler
 
+- Java
 - Spring Boot
 - PostgreSQL
+- Docker
 
 ## Kurulum
 
